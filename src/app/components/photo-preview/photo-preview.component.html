@@ -1,0 +1,50 @@
+<div *ngIf="!photo; else main_content">
+  <svg viewBox="25 25 50 50">
+    <circle r="20" cy="50" cx="50"></circle>
+  </svg>
+</div>
+
+<ng-template #main_content>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <img
+          src="http://localhost:3000/{{ photo.imagePath }}"
+          class="img-fluid"
+          alt="{{ photo.title }}"
+        />
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <div class="container">
+          <form (submit)="updatePhoto(title, description)" class="card-body">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Titulo de la foto"
+                [value]="photo.title"
+                #title
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                rows="2"
+                class="form-control"
+                placeholder="Descripcion de la foto"
+                [value]="photo.description"
+                #description
+              ></textarea>
+            </div>
+            <br>
+            <button class="form-control btn btn-primary btn-block">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button  class="btn btn-danger" (click)="deletePhoto(photo.id)">
+    Eliminar
+  </button>
+</ng-template>

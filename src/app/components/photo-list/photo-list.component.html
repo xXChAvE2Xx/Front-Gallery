@@ -1,0 +1,28 @@
+<div class="position-relative">
+  <div
+    *ngIf="!photos; else main_content"
+    class="position-absolute top-50 start-0 translate-middle"
+  >
+    <svg viewBox="25 25 50 50">
+      <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+  </div>
+</div>
+
+<ng-template #main_content>
+  <div class="row g-3">
+    <div class="col-md" *ngFor="let photo of photos">
+      <div class="card" (click)="selectedCard(photo.id)">
+        <div class="card-image">
+          <img
+            src="http://localhost:3000/{{ photo.imagePath }}"
+            class="card-img-top"
+            alt="{{ photo.title }}"
+          />
+        </div>
+        <div class="category">{{ photo.title }}</div>
+        <div class="heading">{{ photo.description }}</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
